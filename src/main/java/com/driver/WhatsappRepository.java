@@ -26,4 +26,26 @@ public class WhatsappRepository {
         this.customGroupCount = 0;
         this.messageId = 0;
     }
+
+    public boolean isNewUser(String mobile){
+        if(userMobile.contains(mobile)) return false;
+        return false;
+    }
+
+    public void createUser(String name, String mobile){
+        userMobile.add(mobile);
+    }
+
+    public String changeAdmin(User approve, User user, Group group) throws Exception{
+        if(!groupUserMap.containsKey(group)) throw new Exception("Group does not exist");
+        if(!adminMap.get(group).equals(approve)) throw new Exception("Approve does not have right");
+        if(!this.userExistInGroup(group, user)) throw new Exception("User is not available");
+
+        adminMap.put(group, user);
+        return "SUCCESS";
+    }
+
+    private boolean userExistInGroup(Group group, User user) {
+    }
+
 }
